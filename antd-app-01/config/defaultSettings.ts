@@ -13,7 +13,7 @@ const proSettings: DefaultSettings = {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'YouPost',
+  title: 'moba.my',
   pwa: false,
   iconfontUrl: '',
 };

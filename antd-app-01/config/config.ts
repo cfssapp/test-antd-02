@@ -78,6 +78,7 @@ export default defineConfig({
               icon: 'smile',
               component: './Welcome',
             },
+            
             {
               path: '/list',
               icon: 'table',
@@ -94,6 +95,12 @@ export default defineConfig({
                 //   path: '/list/table-list',
                 //   component: './list/table-list',
                 // },
+                {
+                  path: 'todo',
+                  name: 'todo',
+                  icon: 'unordered-list',
+                  component: './todo',
+                },
                 {
                   name: 'basic-list',
                   icon: 'smile',

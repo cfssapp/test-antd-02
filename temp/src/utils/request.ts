@@ -45,10 +45,14 @@ const errorHandler = (error: { response: Response }): Response => {
   return response;
 };
 
+
+// const httpServer = 'https://drfserver.pythonanywhere.com';
+
 /**
  * 配置request请求时的默认参数
  */
 const request = extend({
+  // prefix: httpServer,
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
 });
