@@ -8,7 +8,7 @@
 export default {
   dev: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
+      target: 'https://drfserver.pythonanywhere.com',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
@@ -22,7 +22,7 @@ export default {
   },
   pre: {
     '/api/': {
-      target: 'your pre url',
+      target: 'https://drfserver.pythonanywhere.com',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

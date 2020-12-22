@@ -1,27 +1,63 @@
-import request from 'umi-request';
+// import request from 'umi-request';
+import request from '@/utils/request';
+import { ToDoListItemDataType } from './data.d';
 
-export async function getAll() {
-    const options = {
-        method: 'GET'
-    };
-    const url = '/items';
-    return request(url, options);
+interface ParamsType extends Partial<ToDoListItemDataType> {
+    // count?: number;
+  }
+
+//let drfURL = '/api/todo_list';
+//let drfURL = 'https://drfserver.pythonanywhere.com/api/article/';
+let drfURL = 'https://drfserver.pythonanywhere.com/antd/todo-list/';
+
+export async function queryToDoList(params: ParamsType) {
+    return request(drfURL, {
+        params,
+    });
 }
 
-export async function addItem(item) {
-    const options = {
-        method: 'POST'
-    };
-    const url = '/item';
-    options.data = item;
-    return request(url, options);
+export async function addToDoList(params: ParamsType) {
+  const { ...restParams } = params;
+  return request(drfURL, {
+    method: 'POST',
+    
+    params: {
+
+    },
+    data: {
+      ...restParams,
+      method: 'post',
+    },
+  });
 }
 
-export async function updateItem(item) {
-    const options = {
-        method: 'PUT'
-    };
-    const url = '/item';
-    options.data = item;
-    return request(url, options);
+export async function updateToDoList(params: ParamsType) {
+  const { ...restParams } = params;
+  return request(drfURL, {
+    method: 'POST',
+    params: {
+
+    },
+    data: {
+      ...restParams,
+      method: 'update',
+    },
+  });
 }
+
+export async function removeToDoList(params: ParamsType) {
+  const { ...restParams } = params;
+  return request(drfURL, {
+    method: 'POST',
+    params: {
+
+    },
+    data: {
+      ...restParams,
+      method: 'delete',
+    },
+  });
+}
+
+
+

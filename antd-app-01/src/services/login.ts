@@ -7,13 +7,16 @@ export interface LoginParamsType {
   captcha: string;
 }
 
+let drfURL = '/api/login/account';
+//let drfURL = 'https://drfserver.pythonanywhere.com/api/';
+
 export async function fakeAccountLogin(params: LoginParamsType) {
-  return request('https://drfserver.pythonanywhere.com/api/task-list/', {
+  return request(drfURL, {
     method: 'POST',
     data: params,
   });
 }
 
 export async function getFakeCaptcha(mobile: string) {
-  return request(`https://drfserver.pythonanywhere.com/api/task-list/`);
+  return request(`/api/login/captcha?mobile=${mobile}`);
 }

@@ -10,10 +10,10 @@ const proSettings: DefaultSettings = {
   primaryColor: '#1890ff',
   layout: 'side',
   contentWidth: 'Fluid',
-  fixedHeader: false,
+  fixedHeader: true,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'moba.my',
+  title: 'Cargo',
   pwa: false,
   iconfontUrl: '',
 };

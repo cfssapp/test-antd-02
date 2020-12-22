@@ -1,7 +1,10 @@
 import request from 'umi-request';
 
+//let baseURL = '/api/currentUser';
+let baseURL = 'https://drfserver.pythonanywhere.com/antd/';
+
 export async function queryCurrent() {
-  return request('/api/currentUser');
+  return request(baseURL);
 }
 
 export async function queryProvince() {

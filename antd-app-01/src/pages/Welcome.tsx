@@ -1,21 +1,15 @@
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Alert, Typography } from 'antd';
-import styles from './Welcome.less';
+import { Card, Alert } from 'antd';
 
-const CodePreview: React.FC<{}> = ({ children }) => (
-  <pre className={styles.pre}>
-    <code>
-      <Typography.Text copyable>{children}</Typography.Text>
-    </code>
-  </pre>
-);
+
+
 
 export default (): React.ReactNode => (
   <PageContainer>
     <Card>
       <Alert
-        message="网站正在建设中。"
+        message="Coming Soon."
         type="success"
         showIcon
         banner

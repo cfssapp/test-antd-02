@@ -12,9 +12,9 @@ const actions = (
         <FormattedMessage id="userandregister-result.register-result.view-mailbox" />
       </Button>
     </a>
-    <Link to="/">
+    <Link to="/user">
       <Button size="large">
-        <FormattedMessage id="userandregister-result.register-result.back-home" />
+        <FormattedMessage id="userandregister-result.login.login" />
       </Button>
     </Link>
   </div>

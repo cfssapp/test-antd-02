@@ -24,8 +24,7 @@ export function setAuthority(authority: string | string[]) {
 }
 
 export interface StateType {
-  status?: 'ok' | 'error';
-  type?: string;
+  status?: true | false;
   currentAuthority?: 'user' | 'guest' | 'admin';
 }
 
@@ -50,30 +49,18 @@ const Model: ModelType = {
 
   effects: {
     *login({ payload }, { call, put }) {
+      console.log(payload);
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       });
+          
       // Login successfully
-      if (response.status === 'ok') {
+      if (response.is_active === true) {
         message.success('登录成功！');
-        const urlParams = new URL(window.location.href);
-        const params = getPageQuery();
-        let { redirect } = params as { redirect: string };
-        if (redirect) {
-          const redirectUrlParams = new URL(redirect);
-          if (redirectUrlParams.origin === urlParams.origin) {
-            redirect = redirect.substr(urlParams.origin.length);
-            if (redirect.match(/^\/.*#/)) {
-              redirect = redirect.substr(redirect.indexOf('#') + 1);
-            }
-          } else {
-            window.location.href = redirect;
-            return;
-          }
-        }
-        history.replace(redirect || '/');
+        
+        location.href = '/';
       }
     },
 
@@ -84,11 +71,16 @@ const Model: ModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      console.log(payload);
+      // setAuthority(payload.currentAuthority);
+      
+      localStorage.setItem('access_token', payload.access);
+      localStorage.setItem('refresh_token', payload.refresh);
+
+      setAuthority(payload.user_name);
       return {
         ...state,
-        status: payload.status,
-        type: payload.type,
+        status: payload.is_active,
       };
     },
   },

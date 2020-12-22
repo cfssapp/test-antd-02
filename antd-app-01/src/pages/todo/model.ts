@@ -1,35 +1,65 @@
-// import { getAll } from '@/services/todo';
-import { Request, Response } from 'express';
-import { message } from 'antd';
+import { queryToDoList, removeToDoList, updateToDoList, addToDoList } from './service';
+import { Effect, Reducer } from 'umi';
+import { ToDoListItemDataType } from './data.d';
 
-export default {
-  namespace: 'todo',
+
+
+
+export interface StateType {
+  todoList: ToDoListItemDataType[];
+}
+
+export interface ModelType {
+  namespace: string;
+  state: StateType;
+  effects: {
+    fetch: Effect;
+    submit: Effect;
+  };
+  reducers: {
+    queryList: Reducer<StateType>;
+    appendList: Reducer<StateType>;
+  };
+}
+
+const Model: ModelType = {
+  namespace: 'listAndtodoList',
   state: {
     todoList: [],
   },
   effects: {
-    *fetchTodoList({ payload }, { call, put }) {
-      const response = yield call(getAll, payload);
-      if (response.code === 0) {
-        yield put({
-          type: 'setTodoList',
-          payload: response.body,
-        });
-      } else {
-        message.error(response.message);
-        yield put({
-          type: 'setTodoList',
-          payload: [],
-        });
-      }
+    *fetch({ payload }, { call, put }) {
+      const response = yield call(queryToDoList, payload);
+      yield put({
+        type: 'queryList',
+        payload: response,
+      });
+    },
+    *submit({ payload }, { call, put }) {
+      let callback;  
+      callback = addToDoList;
+      const response = yield call(callback, payload); // post
+      yield put({
+        type: 'queryList',
+        payload: response,
+      });
     },
   },
   reducers: {
-    setTodoList(state, action) {
+    queryList(state, action) {
+      // console.log(action);
       return {
         ...state,
         todoList: action.payload,
       };
     },
+    appendList(state = { todoList: [] }, action) {
+      return {
+        ...state,
+        todoList: state.todoList.concat(action.payload),
+      };
+    },
   },
 };
+
+export default Model;

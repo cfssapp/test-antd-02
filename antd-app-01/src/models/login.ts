@@ -63,6 +63,9 @@ const Model: LoginModelType = {
     logout() {
       const { redirect } = getPageQuery();
       // Note: There may be security issues, please note
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      
       if (window.location.pathname !== '/user/login' && !redirect) {
         history.replace({
           pathname: '/user/login',

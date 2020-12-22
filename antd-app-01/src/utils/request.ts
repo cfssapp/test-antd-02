@@ -36,6 +36,7 @@ const errorHandler = (error: { response: Response }): Response => {
       message: `请求错误 ${status}: ${url}`,
       description: errorText,
     });
+    // location.href = '/user';
   } else if (!response) {
     notification.error({
       description: '您的网络发生异常，无法连接服务器',
@@ -48,9 +49,29 @@ const errorHandler = (error: { response: Response }): Response => {
 /**
  * 配置request请求时的默认参数
  */
-const request = extend({
+
+
+
+
+let request = extend({
   errorHandler, // 默认错误处理
-  credentials: 'include', // 默认请求是否带上cookie
+  credentials: 'omit', // 默认请求是否带上cookie
+  headers: {
+    Authorization: 'JWT ' + localStorage.getItem('access_token'),
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
 });
+
+// request.interceptors.response.use(async response => {
+//   let data = localStorage.getItem('access_token');
+
+//   console.log(data);
+//   if (data === null) {
+//     location.href = '/user';
+//   }
+//   return response;
+// });
+
 
 export default request;

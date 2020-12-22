@@ -3,7 +3,7 @@ import { Effect, Reducer } from 'umi';
 import { fakeRegister } from './service';
 
 export interface StateType {
-  status?: 'ok' | 'error';
+  status?: true | false;
   currentAuthority?: 'user' | 'guest' | 'admin';
 }
 
@@ -37,9 +37,10 @@ const Model: ModelType = {
 
   reducers: {
     registerHandle(state, { payload }) {
+      console.log(payload);
       return {
         ...state,
-        status: payload.status,
+        status: payload.is_active,
       };
     },
   },

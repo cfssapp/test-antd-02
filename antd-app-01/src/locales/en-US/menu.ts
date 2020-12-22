@@ -24,6 +24,7 @@ export default {
   'menu.list': 'List',
   'menu.list.table-list': 'Search Table',
   'menu.list.basic-list': 'Basic List',
+  'menu.list.todo-list': 'Todo List',
   'menu.list.card-list': 'Card List',
   'menu.list.search-list': 'Search List',
   'menu.list.search-list.articles': 'Search List(articles)',
